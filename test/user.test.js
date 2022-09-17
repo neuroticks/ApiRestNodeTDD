@@ -9,3 +9,12 @@ test('Deve listar todos os usuários', ()=>{
         expect(res.body[0]).toHaveProperty('nome','rodrigo')
     })
 })
+
+test('Deve inserir usuário',()=>{
+    return request(app).post('/users')
+    .send({nome:'Zebra', email:'zebra@mail.com'})
+    .then((res)=>{
+        expect(res.status).toBe(201)
+        expect(res.body.nome).toBe('Zebra')
+    })
+})
