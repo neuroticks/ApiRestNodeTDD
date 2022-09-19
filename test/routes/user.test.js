@@ -2,21 +2,20 @@ const request = require('supertest');
 
 const app = require('../../src/app');
 
+const email = `${Date.now()}@email.com.br`;
+
 test('Deve listar todos os usuários', () => request(app).get('/users')
   .then((res) => {
     expect(res.status).toBe(200);
     expect(res.body.length).toBeGreaterThan(0);
   }));
 
-test('Deve inserir usuário', () => {
-  const email = `${Date.now()}@email.com.br`;
-  return request(app).post('/users')
-    .send({ nome: 'Zebra', email, senha: 'senha' })
-    .then((res) => {
-      expect(res.status).toBe(201);
-      expect(res.body.nome).toBe('Zebra');
-    });
-});
+test('Deve inserir usuário', () => request(app).post('/users')
+  .send({ nome: 'Zebra', email, senha: 'senha' })
+  .then((res) => {
+    expect(res.status).toBe(201);
+    expect(res.body.nome).toBe('Zebra');
+  }));
 
 test('Não deve inserir usuário sem nome', () => request(app).post('/users')
   .send({ email: 'zebra@email.com', senha: 'senha' })
@@ -42,3 +41,9 @@ test('Não deve inserir usuário sem senha', (terminou) => {
     });
 });
 
+test('Não deve inserir usuário com email repetido', () => request(app).post('/users')
+  .send({ nome: 'Zebra da Silva', email, senha: 'nova-senha' })
+  .then((res) => {
+    expect(res.status).toBe(400);
+    expect(res.body.error).toBe('Já existe usuário com este email.');
+  }));
