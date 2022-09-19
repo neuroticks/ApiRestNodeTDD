@@ -19,12 +19,12 @@ app.get('/', (req, res) => {
   res.status(200).send();
 });
 
-
+/*
 app.db.on('query', (query)=>{
   console.log({sql:query.sql, binding: query.bindings ? query.bindings : ''})
 })
   .on('query-response', response => console.log(response))
   .on('error', error => console.log(error))
-
+*/
 
 module.exports = app;
