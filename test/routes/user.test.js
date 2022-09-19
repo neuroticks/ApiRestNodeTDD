@@ -9,11 +9,11 @@ test('Deve listar todos os usuários', () => request(app).get('/users')
   }));
 
 test('Deve inserir usuário', () => {
-  const email = `${Date.now()}@email.com.br`
+  const email = `${Date.now()}@email.com.br`;
   return request(app).post('/users')
-  .send({ nome: 'Zebra', email, senha: 'senha' })
-  .then((res) => {
-    expect(res.status).toBe(201);
-    expect(res.body.nome).toBe('Zebra');
-  })
+    .send({ nome: 'Zebra', email, senha: 'senha' })
+    .then((res) => {
+      expect(res.status).toBe(201);
+      expect(res.body.nome).toBe('Zebra');
+    });
 });

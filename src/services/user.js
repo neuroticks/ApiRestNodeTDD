@@ -1,12 +1,8 @@
-const app = require("../app");
+const app = require('../app');
 
-module.exports=(app) =>{
-    const findAll = () => {
-        return app.db('users').select()
-    }
-    const save = (user) => {
-        return app.db('users').insert(user, '*')
-    }
+module.exports = (app) => {
+  const findAll = () => app.db('users').select();
 
-    return {findAll, save}
-}
+  const save = (user) => app.db('users').insert(user, '*');
+  return { findAll, save };
+};
