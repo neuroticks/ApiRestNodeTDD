@@ -1,5 +1,7 @@
 module.exports = (app) => {
   const save = (conta) => app.db('accounts').insert(conta, '*');
 
-  return { save };
+  const findAll = () => app.db('accounts');
+
+  return { save, findAll };
 };
