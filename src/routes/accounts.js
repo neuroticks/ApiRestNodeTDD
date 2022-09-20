@@ -4,5 +4,10 @@ module.exports = (app) => {
       .then((retorno) => res.status(201).json(retorno[0]));
   };
 
-  return { create };
+  const retornaTodas = (req, res) => {
+    app.services.account.findAll()
+      .then((retorno) => res.status(200).json(retorno));
+  };
+
+  return { create, retornaTodas };
 };
